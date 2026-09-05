@@ -1,0 +1,459 @@
+[
+  {
+    "id": "nextjs",
+    "label": "Next.js Development",
+    "subs": [
+      {
+        "id": "landing",
+        "label": "Landing Page",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 290,
+            "old": 700,
+            "features": [
+              "1-page responsive landing site",
+              "Contact form",
+              "Basic on-page SEO setup",
+              "Mobile + desktop layouts",
+              "1 round of revisions",
+              "3-day delivery"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 540,
+            "old": 1300,
+            "features": [
+              "Up to 3 sections/pages",
+              "Custom scroll animations",
+              "Contact-to-CRM lead capture",
+              "Speed-optimized (Core Web Vitals)",
+              "Basic on-page SEO setup",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 915,
+            "old": 2200,
+            "features": [
+              "Multi-variant A/B landing pages",
+              "Editable content (Custom Code / Next.js)",
+              "Analytics + conversion tracking",
+              "Custom scroll animations",
+              "Priority delivery",
+              "Unlimited revisions (14 days)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "webapp",
+        "label": "Full Web App",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 745,
+            "old": 1800,
+            "features": [
+              "Up to 5 pages/routes",
+              "Auth-ready structure",
+              "REST/GraphQL API integration",
+              "Responsive across devices",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 1495,
+            "old": 3600,
+            "features": [
+              "Up to 12 pages/routes",
+              "Database-backed features",
+              "Salesforce or 3rd-party API integration",
+              "Admin dashboard",
+              "Auth & role-based access",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 2655,
+            "old": 6400,
+            "features": [
+              "Unlimited routes",
+              "Custom backend logic",
+              "Role-based access control",
+              "Performance & SEO audit",
+              "Ongoing support option",
+              "Dedicated project manager"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "salesforce",
+    "label": "Salesforce Solutions",
+    "subs": [
+      {
+        "id": "implementation",
+        "label": "Implementation",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 415,
+            "old": 1000,
+            "features": [
+              "Standard object setup",
+              "Basic page layouts",
+              "Up to 2 user roles",
+              "Data import (up to 1,000 records)",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 915,
+            "old": 2200,
+            "features": [
+              "Custom objects & fields",
+              "Validation rules & workflows",
+              "Up to 5 user roles/profiles",
+              "Email-to-case setup",
+              "Data import (up to 10,000 records)",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 1825,
+            "old": 4400,
+            "features": [
+              "Multi-department rollout",
+              "Approval processes",
+              "Custom reports & dashboards",
+              "Data migration & cleansing",
+              "Dedicated project manager",
+              "Ongoing support option"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "customization",
+        "label": "Customization & Integration",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 580,
+            "old": 1400,
+            "features": [
+              "1 Lightning Web Component",
+              "Basic Apex trigger",
+              "Sandbox testing",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 1245,
+            "old": 3000,
+            "features": [
+              "Up to 3 custom LWCs",
+              "Apex classes & triggers",
+              "Experience Cloud page setup",
+              "Third-party API integration",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 2325,
+            "old": 5600,
+            "features": [
+              "Full Experience Cloud portal",
+              "Complex Apex automation",
+              "Multiple integrations (payment, email, etc.)",
+              "Performance tuning",
+              "Ongoing support option",
+              "Dedicated project manager"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "uiux",
+    "label": "UI/UX Design",
+    "subs": [
+      {
+        "id": "website-uiux",
+        "label": "Website UI/UX",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 250,
+            "old": 600,
+            "features": [
+              "Up to 4 screens",
+              "Mobile + desktop layouts",
+              "Style tile (colors & type)",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 540,
+            "old": 1300,
+            "features": [
+              "Up to 10 screens",
+              "Full design system (colors, type, components)",
+              "Interactive prototype",
+              "Mobile + desktop layouts",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 995,
+            "old": 2400,
+            "features": [
+              "Unlimited screens",
+              "User research & wireframing",
+              "Full design system",
+              "Handoff-ready dev specs",
+              "Unlimited revisions (14 days)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "app-uiux",
+        "label": "App/Product UI/UX",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 330,
+            "old": 800,
+            "features": [
+              "Up to 6 app screens",
+              "iOS + Android layouts",
+              "Style tile (colors & type)",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 705,
+            "old": 1700,
+            "features": [
+              "Up to 15 app screens",
+              "Design system + component library",
+              "Clickable prototype",
+              "iOS + Android layouts",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 1330,
+            "old": 3200,
+            "features": [
+              "Unlimited screens",
+              "User flow mapping & testing",
+              "Design system + component library",
+              "Dev handoff (Figma specs)",
+              "Unlimited revisions (14 days)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "graphics",
+    "label": "Graphics & Logos",
+    "subs": [
+      {
+        "id": "logo",
+        "label": "Logo Design",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 65,
+            "old": 160,
+            "features": [
+              "2 initial concepts",
+              "1 round of revisions",
+              "Final files (PNG, SVG)",
+              "2-day delivery"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 150,
+            "old": 360,
+            "features": [
+              "4 initial concepts",
+              "3 rounds of revisions",
+              "Full file package (PNG, SVG, PDF, EPS)",
+              "Basic brand color palette",
+              "3-day delivery"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 290,
+            "old": 700,
+            "features": [
+              "Unlimited concepts",
+              "Brand color palette & typography",
+              "Full file package (all formats)",
+              "Unlimited revisions (7 days)"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "brandkit",
+        "label": "Full Brand Kit",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 210,
+            "old": 500,
+            "features": [
+              "Logo + business card design",
+              "Basic style guide",
+              "Final files (PNG, SVG, PDF)",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 455,
+            "old": 1100,
+            "features": [
+              "Logo + stationery set",
+              "Social media kit",
+              "Full brand style guide",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 830,
+            "old": 2000,
+            "features": [
+              "Complete brand identity system",
+              "Packaging/merch templates",
+              "Brand guidelines document",
+              "Unlimited revisions (7 days)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "website",
+    "label": "Full Website Builds",
+    "subs": [
+      {
+        "id": "business-site",
+        "label": "Business Website",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 375,
+            "old": 900,
+            "features": [
+              "Single-page or small site",
+              "Mobile-responsive design",
+              "Logo or basic brand kit",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 995,
+            "old": 2400,
+            "features": [
+              "Multi-page Next.js website",
+              "Custom UI/UX design",
+              "Contact-to-CRM lead capture",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 2325,
+            "old": 5600,
+            "features": [
+              "Advanced website or web app",
+              "Full Salesforce build-out",
+              "Automation & integrations",
+              "Ongoing support option"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecommerce-site",
+        "label": "E-Commerce Website",
+        "plans": [
+          {
+            "name": "Starter",
+            "price": 745,
+            "old": 1800,
+            "features": [
+              "Up to 20 products",
+              "Cart & checkout",
+              "Basic payment gateway setup",
+              "Mobile-responsive design",
+              "1 round of revisions"
+            ]
+          },
+          {
+            "name": "Business",
+            "price": 1825,
+            "old": 4400,
+            "features": [
+              "Up to 100 products",
+              "Custom product filtering",
+              "Inventory + order management",
+              "Content management (Custom Code / Next.js)",
+              "3 rounds of revisions"
+            ],
+            "featured": true
+          },
+          {
+            "name": "Advanced",
+            "price": 3735,
+            "old": 9000,
+            "features": [
+              "Unlimited products",
+              "Multi-currency & multi-language",
+              "Custom admin dashboard",
+              "Content management (Custom Code / Next.js)",
+              "Dedicated project manager"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
