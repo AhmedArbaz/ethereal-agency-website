@@ -686,3 +686,139 @@ footer.site-footer{ border-top:1px solid var(--line); padding:40px 0; }
   .admin-service-row{ grid-template-columns:1fr; }
   .admin-service-icon-col{ flex-direction:row; width:auto; }
 }
+
+/* ---------- PORTFOLIO ---------- */
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:20px;
+}
+.portfolio-card{
+  position:relative;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background-color:var(--leather-mid);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.portfolio-card img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.5s ease;
+}
+.portfolio-card:hover img{ transform:scale(1.06); }
+.portfolio-placeholder-title{
+  color:rgba(255,255,255,0.5);
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:1.1rem;
+  padding:0 24px;
+  text-align:center;
+}
+.portfolio-overlay{
+  position:absolute; inset:0;
+  background:rgba(10,6,4,0.72);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px;
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+.portfolio-card:hover .portfolio-overlay{ opacity:1; }
+.portfolio-plus{
+  width:52px; height:52px;
+  border-radius:50%;
+  border:1.5px solid var(--gold-bright);
+  background:transparent;
+  color:var(--gold-bright);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transform:scale(0.7);
+  transition:transform 0.3s ease, background 0.2s ease, color 0.2s ease;
+}
+.portfolio-plus svg{ width:22px; height:22px; }
+.portfolio-card:hover .portfolio-plus{ transform:scale(1); }
+.portfolio-plus:hover{ background:var(--gold-bright); color:#1b1208; }
+.portfolio-overlay-title{
+  color:var(--cream);
+  font-size:0.9rem;
+  letter-spacing:0.03em;
+  text-align:center;
+  padding:0 16px;
+}
+
+.portfolio-lightbox{
+  position:fixed; inset:0; z-index:200;
+  background:rgba(6,4,3,0.92);
+  display:flex; align-items:center; justify-content:center;
+  padding:40px 20px;
+  animation:lightbox-fade 0.25s ease;
+}
+@keyframes lightbox-fade{ from{ opacity:0; } to{ opacity:1; } }
+.portfolio-lightbox-content{
+  max-width:900px; width:100%;
+  background:var(--leather-mid);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  display:flex; flex-direction:column;
+}
+.portfolio-lightbox-content img{
+  width:100%; max-height:70vh; object-fit:contain; background:#000;
+  display:block;
+}
+.portfolio-lightbox-placeholder{
+  width:100%; min-height:320px;
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,0.6);
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:1.4rem;
+}
+.portfolio-lightbox-info{
+  padding:22px 26px;
+  display:flex; flex-direction:column; gap:6px;
+  align-items:flex-start;
+}
+.portfolio-lightbox-info h3{ font-size:1.3rem; }
+.portfolio-lightbox-info span{ color:var(--muted); font-size:0.85rem; margin-bottom:8px; }
+.portfolio-lightbox-close{
+  position:fixed;
+  top:28px; right:32px;
+  width:44px; height:44px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,0.4);
+  color:var(--cream);
+  font-size:1.6rem;
+  line-height:1;
+  cursor:pointer;
+  z-index:201;
+}
+.portfolio-lightbox-close:hover{ border-color:var(--gold); color:var(--gold-bright); }
+
+@media (max-width:860px){
+  .portfolio-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:560px){
+  .portfolio-grid{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){
+  .portfolio-card img, .portfolio-overlay, .portfolio-plus{ transition:none !important; }
+  .portfolio-lightbox{ animation:none !important; }
+}
+
+/* ---------- ADMIN: PORTFOLIO PANEL EXTRAS ---------- */
+.admin-panel-hint{ color:var(--muted); font-size:0.85rem; margin:-8px 0 4px; }
+.admin-form-row-2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.admin-portfolio-preview{
+  width:96px; height:72px;
+  border-radius:var(--radius);
+}
+.admin-portfolio-preview img{ width:100%; height:100%; object-fit:cover; }
+@media (max-width:700px){
+  .admin-form-row-2{ grid-template-columns:1fr; }
+}

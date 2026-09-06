@@ -1,0 +1,44 @@
+[
+  {
+    "id": "sample-1",
+    "title": "Your Project Here",
+    "category": "Next.js Websites",
+    "imageUrl": "",
+    "link": ""
+  },
+  {
+    "id": "sample-2",
+    "title": "Your Project Here",
+    "category": "UI/UX Design",
+    "imageUrl": "",
+    "link": ""
+  },
+  {
+    "id": "sample-3",
+    "title": "Your Project Here",
+    "category": "Branding & Logos",
+    "imageUrl": "",
+    "link": ""
+  },
+  {
+    "id": "sample-4",
+    "title": "Your Project Here",
+    "category": "Salesforce / CRM",
+    "imageUrl": "",
+    "link": ""
+  },
+  {
+    "id": "sample-5",
+    "title": "Your Project Here",
+    "category": "Full-Stack Builds",
+    "imageUrl": "",
+    "link": ""
+  },
+  {
+    "id": "sample-6",
+    "title": "Your Project Here",
+    "category": "Next.js Websites",
+    "imageUrl": "",
+    "link": ""
+  }
+]

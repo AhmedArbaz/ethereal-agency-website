@@ -25,6 +25,11 @@
    ```bash
    node --env-file=.env.local scripts/seed-services-firebase.js
    ```
+8. Seed the starting portfolio section (placeholder projects — replace these
+   with real screenshots from the admin panel):
+   ```bash
+   node --env-file=.env.local scripts/seed-portfolio-firebase.js
+   ```
 8. (Optional, for uploading custom icons from the admin panel) On
    https://cloudinary.com (free tier is fine), copy your **Cloud name**
    from the dashboard, then create an **unsigned** upload preset at
@@ -73,6 +78,14 @@ usage quotas, so the site keeps working even after long gaps with no visits.
   icon. Without Cloudinary configured, everything else still works; only the
   icon upload button will show an error until you add the two
   `NEXT_PUBLIC_CLOUDINARY_*` keys.
+- A third tab, **"Portfolio"**, manages the project grid on the homepage
+  (right after the hero section): add/remove projects, set a title, category
+  (the public filter pills are generated automatically from whatever
+  categories you use), an optional live-site link, and upload a screenshot
+  (5MB max). Projects with no image show a gold-gradient placeholder card
+  labeled "Your Project Here" on the site, so it's obvious which ones still
+  need a real screenshot. Visitors filter by category and click the "+" on
+  hover to open a project in a lightbox.
 
 ## Where things live
 
@@ -80,11 +93,14 @@ usage quotas, so the site keeps working even after long gaps with no visits.
 - `app/page.js` — the public site (hero, services, process, pricing, about, contact, WhatsApp button)
 - `app/PlanExplorer.js` — the public filterable pricing cards (fetches `/api/pricing`)
 - `app/ServicesGrid.js` — the public "What we build" cards (fetches `/api/services`)
+- `app/PortfolioGrid.js` — the public portfolio section: filters, hover "+", lightbox (fetches `/api/portfolio`)
 - `app/admin/login/page.js` — admin login screen
-- `app/admin/AdminDashboard.js` — the admin shell + Pricing Plans editor (filters + form + live preview)
+- `app/admin/AdminDashboard.js` — the admin shell + tab switcher + Pricing Plans editor
 - `app/admin/ServicesPanel.js` — the Services editor (title/description/icon upload, add/remove cards)
+- `app/admin/PortfolioPanel.js` — the Portfolio editor (title/category/link/image upload, add/remove projects)
 - `app/api/pricing/route.js` — GET (public) / PUT (login required), backed by Firestore
 - `app/api/services/route.js` — GET (public) / PUT (login required), backed by Firestore
+- `app/api/portfolio/route.js` — GET (public) / PUT (login required), backed by Firestore
 - `app/api/auth/login`, `app/api/auth/logout` — session cookie endpoints
 - `middleware.js` — redirects unauthenticated visitors away from `/admin/*`
 - `lib/auth.js` — email/password check + signed session cookie helpers
@@ -92,7 +108,8 @@ usage quotas, so the site keeps working even after long gaps with no visits.
 - `firestore.rules` — locks Firestore to server-only (Admin SDK) access
 - `scripts/seed-firebase.js` — one-time script to push `data/pricing.json` into Firestore
 - `scripts/seed-services-firebase.js` — one-time script to push `data/services.json` into Firestore
-- `data/pricing.json`, `data/services.json` — starting content, used only for seeding (the live site reads from Firestore once seeded)
+- `scripts/seed-portfolio-firebase.js` — one-time script to push `data/portfolio.json` into Firestore
+- `data/pricing.json`, `data/services.json`, `data/portfolio.json` — starting content, used only for seeding (the live site reads from Firestore once seeded)
 - `app/globals.css` — all styling, including the admin panel
 - `public/images/` — logo, leather background photo, brown leather accent texture
 

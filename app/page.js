@@ -2,6 +2,7 @@
 
 import PlanExplorer from './PlanExplorer';
 import ServicesGrid from './ServicesGrid';
+import PortfolioGrid from './PortfolioGrid';
 
 export default function Home() {
   function handleSubmit(e) {
@@ -27,6 +28,7 @@ export default function Home() {
             </div>
           </div>
           <ul>
+            <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#process">Process</a></li>
             <li><a href="#pricing">Pricing</a></li>
@@ -47,6 +49,18 @@ export default function Home() {
             <a href="#services" className="btn btn-outline">Browse services</a>
           </div>
           <div className="markets">Serving clients across the United States &amp; United Kingdom</div>
+        </div>
+      </section>
+
+      {/* ============ PORTFOLIO ============ */}
+      <section id="portfolio" className="leather">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="kicker">Our work</span>
+            <h2>Projects we&apos;ve shipped</h2>
+            <p>A look at recent builds across the disciplines we cover — filter by type, then click a project to see it up close.</p>
+          </div>
+          <PortfolioGrid />
         </div>
       </section>
 
@@ -186,6 +200,7 @@ export default function Home() {
               <span>ETHEREAL</span>
             </div>
             <ul className="footer-links">
+              <li><a href="#portfolio">Portfolio</a></li>
               <li><a href="#services">Services</a></li>
               <li><a href="#pricing">Pricing</a></li>
               <li><a href="#contact">Contact</a></li>

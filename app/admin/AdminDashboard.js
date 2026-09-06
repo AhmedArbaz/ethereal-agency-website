@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ServicesPanel from './ServicesPanel';
+import PortfolioPanel from './PortfolioPanel';
 
 function CheckIcon() {
   return (
@@ -190,7 +191,20 @@ export default function AdminDashboard() {
         >
           Services (&quot;What we build&quot;)
         </button>
+        <button
+          type="button"
+          className={'filter-pill' + (activeTab === 'portfolio' ? ' active' : '')}
+          onClick={() => setActiveTab('portfolio')}
+        >
+          Portfolio
+        </button>
       </div>
+
+      {activeTab === 'portfolio' && (
+        <div className="wrap admin-content admin-content-single">
+          <PortfolioPanel />
+        </div>
+      )}
 
       {activeTab === 'services' && (
         <div className="wrap admin-content admin-content-single">
