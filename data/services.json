@@ -1,0 +1,32 @@
+[
+  {
+    "id": "nextjs-dev",
+    "title": "Next.js Development",
+    "description": "Fast, SEO-ready websites and web apps built on modern React foundations.",
+    "iconUrl": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23eecd76%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M12%202%202%207l10%205%2010-5-10-5Z%22/%3E%3Cpath%20d%3D%22M2%2017l10%205%2010-5%22/%3E%3Cpath%20d%3D%22M2%2012l10%205%2010-5%22/%3E%3C/svg%3E"
+  },
+  {
+    "id": "salesforce",
+    "title": "Salesforce Solutions",
+    "description": "Custom Apex, LWC, and Experience Cloud builds that connect your site to a working CRM.",
+    "iconUrl": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23eecd76%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M12%202v20M2%2012h20%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22/%3E%3C/svg%3E"
+  },
+  {
+    "id": "uiux",
+    "title": "UI/UX Design",
+    "description": "Wireframes through polished interfaces, designed for the way your users actually move.",
+    "iconUrl": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23eecd76%22%20stroke-width%3D%221.4%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M3%2015l5-5%204%204%205-6%204%205%22/%3E%3C/svg%3E"
+  },
+  {
+    "id": "graphics-logos",
+    "title": "Graphics & Logos",
+    "description": "Brand marks and visual assets built to hold up on a website, a card, or a storefront sign.",
+    "iconUrl": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23eecd76%22%20stroke-width%3D%221.4%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%224%22/%3E%3Cpath%20d%3D%22M4%2021c0-4%204-6%208-6s8%202%208%206%22/%3E%3C/svg%3E"
+  },
+  {
+    "id": "full-website",
+    "title": "Full Website Builds",
+    "description": "From a single landing page to a multi-page production site, scoped to what your business needs now.",
+    "iconUrl": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23eecd76%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M4%204h16v16H4z%22/%3E%3Cpath%20d%3D%22M4%209h16M9%204v16%22/%3E%3C/svg%3E"
+  }
+]

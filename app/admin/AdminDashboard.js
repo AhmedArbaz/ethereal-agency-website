@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import ServicesPanel from './ServicesPanel';
 
 function CheckIcon() {
   return (
@@ -18,6 +19,7 @@ function money(n) {
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState('pricing'); // pricing | services
   const [data, setData] = useState(null);
   const [selCat, setSelCat] = useState(null);
   const [selSub, setSelSub] = useState(null);
@@ -37,19 +39,10 @@ export default function AdminDashboard() {
       .catch(() => setStatusMsg('Could not load pricing data.'));
   }, []);
 
-  if (!data) {
-    return (
-      <div className="admin-shell">
-        <div className="bg-animated" aria-hidden="true"></div>
-        <div className="wrap admin-loading">Loading pricing data…</div>
-      </div>
-    );
-  }
-
-  const category = data.find((c) => c.id === selCat);
-  const sub = category.subs.find((s) => s.id === selSub);
-  const plan = sub.plans[selPlanIdx];
-  const discountPct = plan.old > 0 ? Math.round((1 - plan.price / plan.old) * 100) : 0;
+  const category = data ? data.find((c) => c.id === selCat) : null;
+  const sub = category ? category.subs.find((s) => s.id === selSub) : null;
+  const plan = sub ? sub.plans[selPlanIdx] : null;
+  const discountPct = plan && plan.old > 0 ? Math.round((1 - plan.price / plan.old) * 100) : 0;
 
   function selectCategory(catId) {
     const cat = data.find((c) => c.id === catId);
@@ -182,6 +175,34 @@ export default function AdminDashboard() {
         </div>
       </header>
 
+      <div className="wrap admin-tabs">
+        <button
+          type="button"
+          className={'filter-pill' + (activeTab === 'pricing' ? ' active' : '')}
+          onClick={() => setActiveTab('pricing')}
+        >
+          Pricing Plans
+        </button>
+        <button
+          type="button"
+          className={'filter-pill' + (activeTab === 'services' ? ' active' : '')}
+          onClick={() => setActiveTab('services')}
+        >
+          Services (&quot;What we build&quot;)
+        </button>
+      </div>
+
+      {activeTab === 'services' && (
+        <div className="wrap admin-content admin-content-single">
+          <ServicesPanel />
+        </div>
+      )}
+
+      {activeTab === 'pricing' && !data && (
+        <div className="wrap admin-loading">Loading pricing data…</div>
+      )}
+
+      {activeTab === 'pricing' && data && (
       <div className="wrap admin-content">
         <section className="admin-panel stitch-box">
           <h2>Select a plan to edit</h2>
@@ -325,6 +346,7 @@ export default function AdminDashboard() {
           </div>
         </section>
       </div>
+      )}
     </div>
   );
 }

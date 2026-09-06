@@ -1,6 +1,7 @@
 'use client';
 
 import PlanExplorer from './PlanExplorer';
+import ServicesGrid from './ServicesGrid';
 
 export default function Home() {
   function handleSubmit(e) {
@@ -59,33 +60,7 @@ export default function Home() {
           </div>
         </div>
         <div className="wrap" style={{ padding: 0 }}>
-          <div className="services-grid">
-            <div className="service-plaque">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-              <h3>Next.js Development</h3>
-              <p>Fast, SEO-ready websites and web apps built on modern React foundations.</p>
-            </div>
-            <div className="service-plaque">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
-              <h3>Salesforce Solutions</h3>
-              <p>Custom Apex, LWC, and Experience Cloud builds that connect your site to a working CRM.</p>
-            </div>
-            <div className="service-plaque">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-6 4 5"/></svg>
-              <h3>UI/UX Design</h3>
-              <p>Wireframes through polished interfaces, designed for the way your users actually move.</p>
-            </div>
-            <div className="service-plaque">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-              <h3>Graphics &amp; Logos</h3>
-              <p>Brand marks and visual assets built to hold up on a website, a card, or a storefront sign.</p>
-            </div>
-            <div className="service-plaque">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
-              <h3>Full Website Builds</h3>
-              <p>From a single landing page to a multi-page production site, scoped to what your business needs now.</p>
-            </div>
-          </div>
+          <ServicesGrid />
         </div>
       </section>
 
