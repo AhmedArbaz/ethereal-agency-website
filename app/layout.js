@@ -1,9 +1,50 @@
 import "./globals.css";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ethereal-agency-website.vercel.app";
+const TITLE = "Ethereal Web Agency — Next.js, Salesforce & Design";
+const DESCRIPTION =
+  "Ethereal designs and develops Next.js websites, Salesforce systems, and brand visuals for businesses across the US and UK — from a single logo to a full production build.";
+
 export const metadata = {
-  title: "Ethereal Web Agency — Next.js, Salesforce & Design",
-  description:
-    "Ethereal designs and develops Next.js websites, Salesforce systems, and brand visuals for businesses across the US and UK — from a single logo to a full production build.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: "%s — Ethereal Web Agency",
+  },
+  description: DESCRIPTION,
+  keywords: [
+    "Next.js development agency",
+    "Salesforce development",
+    "web design agency",
+    "UI UX design",
+    "brand identity design",
+  ],
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "Ethereal Web Agency",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: "/images/logo.png", width: 400, height: 400 }],
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/images/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport = {
+  themeColor: "#150e0a",
 };
 
 export default function RootLayout({ children }) {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Reveal from './Reveal';
 
 function money(n) {
   return '$' + (Number(n) || 0).toLocaleString('en-US');
@@ -21,24 +22,42 @@ export default function PlanExplorer() {
 
   useEffect(() => {
     fetch('/api/pricing')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load pricing');
+        return res.json();
+      })
       .then((json) => {
+        if (!Array.isArray(json) || json.length === 0) throw new Error('Invalid pricing data');
         setPricing(json);
         setActiveCat(json[0].id);
         setActiveSub(json[0].subs[0].id);
       })
-      .catch(() => {});
+      .catch(() => setPricing([]));
   }, []);
 
   if (!pricing) {
     return <div className="pricing-loading">Loading plans…</div>;
   }
 
+  if (pricing.length === 0) {
+    return (
+      <div className="pricing-loading">
+        Pricing is temporarily unavailable. Please refresh, or{' '}
+        <a href="#contact" style={{ color: 'var(--gold-bright)' }}>get in touch</a> for a quote directly.
+      </div>
+    );
+  }
+
   const category = pricing.find((c) => c.id === activeCat) || pricing[0];
-  const sub = category.subs.find((s) => s.id === activeSub) || category.subs[0];
+  const sub = (category.subs || []).find((s) => s.id === activeSub) || (category.subs || [])[0];
+
+  if (!sub) {
+    return <div className="pricing-loading">Pricing is temporarily unavailable. Please refresh the page.</div>;
+  }
 
   function selectCategory(catId) {
     const cat = pricing.find((c) => c.id === catId);
+    if (!cat || !cat.subs || cat.subs.length === 0) return;
     setActiveCat(catId);
     setActiveSub(cat.subs[0].id);
   }
@@ -76,8 +95,10 @@ export default function PlanExplorer() {
         {sub.plans.map((plan, i) => {
           const discountPct = plan.old > 0 ? Math.round((1 - plan.price / plan.old) * 100) : 0;
           return (
-            <div
+            <Reveal
+              as="div"
               key={plan.name + i}
+              delay={i * 100}
               className={'price-card stitch-box' + (plan.featured ? ' featured leather-accent' : '')}
             >
               {plan.featured && <span className="tag">MOST BOOKED</span>}
@@ -100,7 +121,7 @@ export default function PlanExplorer() {
               <a href="#contact" className={plan.featured ? 'btn btn-gold' : 'btn btn-outline'}>
                 {plan.featured ? 'Get this quote' : 'Start here'}
               </a>
-            </div>
+            </Reveal>
           );
         })}
       </div>

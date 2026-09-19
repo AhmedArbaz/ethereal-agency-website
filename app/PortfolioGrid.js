@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
+import Reveal from './Reveal';
+import Tilt from './Tilt';
 
 const GRADIENTS = [
   'linear-gradient(135deg, var(--leather-warm), var(--gold-dim))',
@@ -69,25 +72,36 @@ export default function PortfolioGrid() {
 
       <div className="portfolio-grid">
         {filtered.map((item, i) => (
-          <div
-            className="portfolio-card"
-            key={item.id}
-            style={!item.imageUrl ? { background: GRADIENTS[i % GRADIENTS.length] } : undefined}
-          >
-            {item.imageUrl && <img src={item.imageUrl} alt={item.title} />}
-            {!item.imageUrl && <span className="portfolio-placeholder-title">{item.title}</span>}
-            <div className="portfolio-overlay">
-              <button
-                type="button"
-                className="portfolio-plus"
-                aria-label={'View ' + item.title}
-                onClick={() => setLightbox(item)}
-              >
-                <PlusIcon />
-              </button>
-              <span className="portfolio-overlay-title">{item.title}</span>
-            </div>
-          </div>
+          <Reveal key={item.id} delay={(i % 6) * 80}>
+            <Tilt
+              as="div"
+              className="portfolio-card"
+              max={7}
+              style={!item.imageUrl ? { background: GRADIENTS[i % GRADIENTS.length] } : undefined}
+            >
+              {item.imageUrl && (
+                <Image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 700px) 100vw, 33vw"
+                  unoptimized={item.imageUrl.startsWith('data:')}
+                />
+              )}
+              {!item.imageUrl && <span className="portfolio-placeholder-title">{item.title}</span>}
+              <div className="portfolio-overlay">
+                <button
+                  type="button"
+                  className="portfolio-plus"
+                  aria-label={'View ' + item.title}
+                  onClick={() => setLightbox(item)}
+                >
+                  <PlusIcon />
+                </button>
+                <span className="portfolio-overlay-title">{item.title}</span>
+              </div>
+            </Tilt>
+          </Reveal>
         ))}
       </div>
 

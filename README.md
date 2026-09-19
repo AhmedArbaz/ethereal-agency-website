@@ -70,6 +70,61 @@ usage quotas, so the site keeps working even after long gaps with no visits.
   section picks it up on next load — no redeploy needed.
 - Session login lasts 7 days and is stored in a signed, http-only cookie
   (`lib/auth.js`).
+- The **Quote Requests** tab shows every contact-form submission, newest
+  first, saved to the `leads` collection in Firestore. Mark a lead
+  "contacted" or delete it from there.
+
+## Contact form / leads
+
+- The homepage contact form posts to `POST /api/leads`, which validates the
+  input, saves it to Firestore, and (optionally) emails you a notification.
+- To get an email whenever someone submits the form: create a free account
+  at https://resend.com, grab an API key, and add it as `RESEND_API_KEY` in
+  `.env.local` (see the comments there). Without it, leads are still saved
+  and visible in the admin panel — you just won't get an email.
+- No Firestore composite index is needed for this — leads are only ordered
+  by a single field (`createdAt`), which Firestore indexes automatically.
+
+## SEO
+
+- `app/layout.js` sets full metadata (title template, description, Open
+  Graph, Twitter card, favicon).
+- `app/robots.js` and `app/sitemap.js` generate `/robots.txt` and
+  `/sitemap.xml` automatically; the admin panel and API routes are excluded
+  from indexing.
+- Set `NEXT_PUBLIC_SITE_URL` in `.env.local` to your real production domain
+  once you have one, so the sitemap/OG tags point to the right place.
+
+## Hero animation & motion
+
+- The hero section now has a Three.js WebGL scene (`app/HeroScene.js`) — a
+  rotating faceted gold gem inside a slim halo ring, with drifting gold-dust
+  particles and a soft glow, plus subtle mouse-parallax camera movement.
+  It's abstract/brand-original artwork (not a copy of any third-party
+  site's assets) built to fit this site's gold/leather palette.
+- The old photographic leather background image is gone site-wide,
+  replaced by a procedural dark gradient + fine grain (`.bg-animated` in
+  `globals.css`) — lighter to load and blends better with the new 3D hero.
+- Word-by-word reveal animation on the hero headline, scroll-reveal
+  (`app/Reveal.js`) on every section/card, magnetic buttons
+  (`app/Magnetic.js`), tilt-on-hover cards (`app/Tilt.js`), a soft custom
+  cursor (`app/CustomCursor.js`), smooth scrolling via Lenis
+  (`app/SmoothScroll.js`), and a scrolling marquee strip under the hero.
+- Everything respects `prefers-reduced-motion` and disables itself on
+  touch devices where appropriate (custom cursor, magnetic/tilt effects).
+- **Fixed a real crash bug** while testing this: `PlanExplorer.js` and the
+  admin dashboard would throw a hard error (blank "Application error"
+  page) if `/api/pricing` ever returned something other than a proper
+  array (e.g. during a slow/failed Firestore call). Both now validate the
+  response and show a friendly "temporarily unavailable" message instead
+  of crashing the whole page.
+
+## Images
+
+- All images (logo, portfolio thumbnails, service icons) now go through
+  `next/image`, which handles lazy-loading, resizing, and format
+  conversion automatically. Cloudinary-hosted images are allow-listed in
+  `next.config.js` (`images.remotePatterns`).
 - A second tab in the admin panel, **"Services (What we build)"**, manages
   the 5 service cards on the homepage: add a new card, remove one, edit its
   title and description, and upload a custom icon image (PNG/JPG/SVG/WEBP/GIF,

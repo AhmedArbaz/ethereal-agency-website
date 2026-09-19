@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import logo from '../../public/images/logo.png';
 import ServicesPanel from './ServicesPanel';
 import PortfolioPanel from './PortfolioPanel';
+import LeadsPanel from './LeadsPanel';
 
 function CheckIcon() {
   return (
@@ -20,7 +23,7 @@ function money(n) {
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('pricing'); // pricing | services
+  const [activeTab, setActiveTab] = useState('leads'); // leads | pricing | services | portfolio
   const [data, setData] = useState(null);
   const [selCat, setSelCat] = useState(null);
   const [selSub, setSelSub] = useState(null);
@@ -30,8 +33,12 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetch('/api/pricing')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load pricing');
+        return res.json();
+      })
       .then((json) => {
+        if (!Array.isArray(json) || json.length === 0) throw new Error('Invalid pricing data');
         setData(json);
         setSelCat(json[0].id);
         setSelSub(json[0].subs[0].id);
@@ -40,13 +47,14 @@ export default function AdminDashboard() {
       .catch(() => setStatusMsg('Could not load pricing data.'));
   }, []);
 
-  const category = data ? data.find((c) => c.id === selCat) : null;
-  const sub = category ? category.subs.find((s) => s.id === selSub) : null;
-  const plan = sub ? sub.plans[selPlanIdx] : null;
+  const category = Array.isArray(data) ? data.find((c) => c.id === selCat) : null;
+  const sub = category ? (category.subs || []).find((s) => s.id === selSub) : null;
+  const plan = sub && sub.plans ? sub.plans[selPlanIdx] : null;
   const discountPct = plan && plan.old > 0 ? Math.round((1 - plan.price / plan.old) * 100) : 0;
 
   function selectCategory(catId) {
-    const cat = data.find((c) => c.id === catId);
+    const cat = Array.isArray(data) ? data.find((c) => c.id === catId) : null;
+    if (!cat || !cat.subs || cat.subs.length === 0) return;
     setSelCat(catId);
     setSelSub(cat.subs[0].id);
     setSelPlanIdx(0);
@@ -166,7 +174,7 @@ export default function AdminDashboard() {
       <header className="admin-topbar">
         <div className="wrap admin-topbar-row">
           <div className="logo-mark">
-            <img src="/images/logo.png" alt="Ethereal Web Agency" />
+            <Image src={logo} alt="Ethereal Web Agency" width={44} height={44} />
             <div>
               <span>ETHEREAL</span>
               <small>ADMIN</small>
@@ -177,6 +185,13 @@ export default function AdminDashboard() {
       </header>
 
       <div className="wrap admin-tabs">
+        <button
+          type="button"
+          className={'filter-pill' + (activeTab === 'leads' ? ' active' : '')}
+          onClick={() => setActiveTab('leads')}
+        >
+          Quote Requests
+        </button>
         <button
           type="button"
           className={'filter-pill' + (activeTab === 'pricing' ? ' active' : '')}
@@ -200,6 +215,12 @@ export default function AdminDashboard() {
         </button>
       </div>
 
+      {activeTab === 'leads' && (
+        <div className="wrap admin-content admin-content-single">
+          <LeadsPanel />
+        </div>
+      )}
+
       {activeTab === 'portfolio' && (
         <div className="wrap admin-content admin-content-single">
           <PortfolioPanel />
@@ -221,43 +242,54 @@ export default function AdminDashboard() {
         <section className="admin-panel stitch-box">
           <h2>Select a plan to edit</h2>
 
-          <div className="filter-row">
-            {data.map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                className={'filter-pill' + (cat.id === selCat ? ' active' : '')}
-                onClick={() => selectCategory(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+          <div className="admin-filter-stack">
+            <div className="admin-filter-group">
+              <span className="admin-filter-label">1. Service</span>
+              <div className="filter-row">
+                {data.map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={'filter-pill' + (cat.id === selCat ? ' active' : '')}
+                    onClick={() => selectCategory(cat.id)}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          <div className="filter-row sub">
-            {category.subs.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                className={'filter-pill' + (s.id === selSub ? ' active' : '')}
-                onClick={() => selectSub(s.id)}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
+            <div className="admin-filter-group">
+              <span className="admin-filter-label">2. Plan type</span>
+              <div className="filter-row sub">
+                {category.subs.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    className={'filter-pill' + (s.id === selSub ? ' active' : '')}
+                    onClick={() => selectSub(s.id)}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          <div className="filter-row sub">
-            {sub.plans.map((p, i) => (
-              <button
-                key={p.name + i}
-                type="button"
-                className={'filter-pill' + (i === selPlanIdx ? ' active' : '')}
-                onClick={() => setSelPlanIdx(i)}
-              >
-                {p.name || 'Untitled'}
-              </button>
-            ))}
+            <div className="admin-filter-group">
+              <span className="admin-filter-label">3. Tier</span>
+              <div className="filter-row sub">
+                {sub.plans.map((p, i) => (
+                  <button
+                    key={p.name + i}
+                    type="button"
+                    className={'filter-pill' + (i === selPlanIdx ? ' active' : '')}
+                    onClick={() => setSelPlanIdx(i)}
+                  >
+                    {p.name || 'Untitled'}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="admin-form">

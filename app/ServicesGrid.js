@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Reveal from './Reveal';
+import Tilt from './Tilt';
 
 export default function ServicesGrid() {
   const [services, setServices] = useState(null);
@@ -18,12 +21,16 @@ export default function ServicesGrid() {
 
   return (
     <div className="services-grid">
-      {services.map((service) => (
-        <div className="service-plaque" key={service.id}>
-          {service.iconUrl && <img src={service.iconUrl} alt="" className="service-icon" />}
-          <h3>{service.title}</h3>
-          <p>{service.description}</p>
-        </div>
+      {services.map((service, i) => (
+        <Reveal key={service.id} delay={(i % 5) * 90}>
+          <Tilt as="div" className="service-plaque" max={6}>
+            {service.iconUrl && (
+              <Image src={service.iconUrl} alt="" className="service-icon" width={30} height={30} unoptimized={service.iconUrl.startsWith('data:')} />
+            )}
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </Tilt>
+        </Reveal>
       ))}
     </div>
   );
