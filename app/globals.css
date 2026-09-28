@@ -1,4 +1,6 @@
 :root{
+  --leather-tex:url('/images/brown-leather.webp');
+  --grain:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgIDAgMCAwIDAgMCAgMCAwIDAgMCAwICAwIDAgMCAwLjA2IDAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbikiLz48L3N2Zz4=');
   --leather-black:#150e0a;
   --leather-dark:#241610;
   --leather-mid:#3a2417;
@@ -33,21 +35,20 @@ h1,h2,h3,.brand-word{
   margin:0;
 }
 
-/* ---------- ANIMATED AMBIENT BACKGROUND ----------
-   A fixed, full-viewport layer that sits behind every section: a deep
-   radial vignette plus a very fine procedural grain (no stock photo), with
-   a slow drift and a moving warm sheen so it reads as alive rather than
-   static, while staying subtle enough not to distract from the content. */
+/* ---------- ANIMATED LEATHER BACKGROUND ----------
+   A fixed, full-viewport layer behind every section below the hero. It
+   slowly scales/pans (leatherDrift) and carries a moving light sheen
+   (sheenMove) so the surface reads as alive rather than a static photo.
+   The hero paints its own dark backdrop on top so the 3D scene stays clean. */
 .bg-animated{
   position:fixed;
   inset:-6%;
   z-index:-2;
   background-color:var(--leather-black);
-  background-image:
-    radial-gradient(120% 90% at 50% 8%, var(--leather-warm) 0%, var(--leather-dark) 46%, var(--leather-black) 82%),
-    url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgIDAgMCAwIDAgMCAgMCAwIDAgMCAwICAwIDAgMCAwLjA2IDAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbikiLz48L3N2Zz4=');
-  background-repeat:no-repeat, repeat;
-  background-size:cover, 140px 140px;
+  background-image:url('/images/leather-bg.webp');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center 20%;
   animation: leatherDrift 42s ease-in-out infinite alternate;
   will-change:transform;
 }
@@ -79,13 +80,15 @@ h1,h2,h3,.brand-word{
 
 .leather{ position:relative; }
 
-/* Warm cognac accent patch -- a gradient tint (no stock photo) used behind
-   featured panels like the About-section pull quote. */
+/* Warm cognac leather patch -- matches the reddish-brown grain visible
+   inside the gold ring on the logo. Used as an accent on featured panels. */
 .leather-accent{
   background-color:#5a3420;
   background-image:
     linear-gradient(rgba(10,6,4,0.5), rgba(10,6,4,0.62)),
-    radial-gradient(120% 140% at 20% 0%, #7a4a28, #3c2313 70%);
+    url('/images/brown-leather.webp');
+  background-repeat:no-repeat, repeat;
+  background-size:cover, 220px 220px;
 }
 
 .stitch{ border-top:1px dashed var(--line); }
@@ -107,9 +110,13 @@ a{ color:inherit; }
 /* ---------- NAV ---------- */
 header{
   position:sticky; top:0; z-index:50;
-  background-color:rgba(11,7,5,0.88);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  background-color:var(--leather-black);
+  background-image:
+    linear-gradient(rgba(8,5,4,0.84), rgba(8,5,4,0.9)),
+    url('/images/leather-bg.webp');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center 12%;
   border-bottom:1px solid var(--line);
 }
 nav.wrap{
@@ -174,7 +181,9 @@ nav ul a:hover{ color:var(--gold-bright); }
 .nav-toggle.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 .mobile-nav{
   border-top:1px solid var(--line);
-  background:var(--leather-black);
+  background-color:var(--leather-black);
+  background-image:linear-gradient(rgba(8,5,4,0.8), rgba(8,5,4,0.88)), var(--leather-tex);
+  background-size:cover, 220px 220px;
 }
 .mobile-nav ul{
   list-style:none; margin:0; padding:16px 20px 20px;
@@ -211,7 +220,13 @@ nav ul a:hover{ color:var(--gold-bright); }
 .btn-outline:hover{ border-color:var(--gold); color:var(--gold-bright); }
 
 /* ---------- HERO ---------- */
-.hero{ position:relative; padding:150px 0 120px; text-align:center; overflow:hidden; min-height:640px; }
+.hero{
+  background-color:var(--leather-black);
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, var(--leather-warm) 0%, var(--leather-dark) 46%, var(--leather-black) 82%),
+    var(--grain);
+  background-size:cover, 140px 140px;
+  position:relative; padding:150px 0 120px; text-align:center; overflow:hidden; min-height:640px; }
 .hero-scene{
   position:absolute; inset:0;
   z-index:0;
@@ -296,7 +311,9 @@ nav ul a:hover{ color:var(--gold-bright); }
   overflow:hidden;
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
-  background:var(--leather-black);
+  background-color:var(--leather-black);
+  background-image:linear-gradient(rgba(8,5,4,0.62), rgba(8,5,4,0.72)), var(--leather-tex);
+  background-size:cover, 220px 220px;
   padding:16px 0;
 }
 .marquee-track{ display:flex; width:max-content; animation:marqueeScroll 26s linear infinite; }
@@ -352,56 +369,116 @@ section{ padding:100px 0; position:relative; }
 .section-head p{ color:var(--muted); margin-top:14px; font-size:1rem; }
 
 /* ---------- SERVICES ---------- */
+/* Bento layout: 6-col grid, first two cards wide, the rest thirds. */
 .services-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
-  gap:1px;
-  background:var(--line);
-  border:1px solid var(--line);
+  grid-template-columns:repeat(6, 1fr);
+  gap:22px;
 }
-.service-plaque{
+.service-cell{ grid-column:span 2; display:flex; }
+.service-cell:nth-child(1), .service-cell:nth-child(2){ grid-column:span 3; }
+.service-cell > *{ flex:1; }
+.service-card{
+  --mx:50%; --my:0%;
   position:relative;
+  display:flex; flex-direction:column;
+  height:100%;
+  padding:34px 32px 30px;
+  border-radius:18px;
+  background:
+    radial-gradient(420px circle at var(--mx) var(--my), rgba(238,205,118,0.16), transparent 60%),
+    linear-gradient(160deg, rgba(40,24,15,0.5), rgba(14,8,5,0.68)),
+    var(--leather-tex);
+  background-size:auto, auto, 220px 220px;
+  background-color:#3a2417;
+  border:1px solid transparent;
+  background-clip:padding-box;
+  box-shadow:0 18px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,236,190,0.08);
+  transition:transform 0.35s cubic-bezier(.16,.84,.44,1), box-shadow 0.35s ease;
+  will-change:transform;
   overflow:hidden;
-  background:var(--leather-dark);
-  padding:38px 30px;
-  transition:background 0.3s ease, transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease;
 }
-.service-plaque::before{
+/* gradient hairline border (masked so the inside stays transparent) */
+.service-card::before{
   content:"";
-  position:absolute; top:0; left:0; right:0;
-  height:3px;
-  background:linear-gradient(90deg, var(--gold-dim), var(--gold-bright), var(--gold-dim));
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform 0.5s ease;
+  position:absolute; inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(150deg, rgba(238,205,118,0.75), rgba(201,162,39,0.12) 40%, rgba(201,162,39,0.05) 60%, rgba(238,205,118,0.45));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  pointer-events:none;
+  transition:opacity 0.35s ease;
 }
-.service-plaque::after{
+/* soft gold glow blob in the corner */
+.service-card::after{
   content:"";
-  position:absolute;
-  top:0; left:-75%;
-  width:50%; height:100%;
-  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.16) 50%, transparent 100%);
-  transform:skewX(-20deg);
-  transition:left 0.8s ease;
+  position:absolute; right:-70px; top:-70px;
+  width:190px; height:190px; border-radius:50%;
+  background:radial-gradient(circle, rgba(238,205,118,0.16), transparent 70%);
   pointer-events:none;
 }
-.service-plaque:hover{
-  background:var(--leather-mid);
-  transform:translateY(-8px);
-  box-shadow:0 20px 45px rgba(0,0,0,0.5);
+.service-card:hover{ box-shadow:0 28px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(238,205,118,0.25), inset 0 1px 0 rgba(255,236,190,0.14); }
+.service-index{
+  position:absolute; top:22px; right:26px;
+  font-family:'Cormorant Garamond', serif;
+  font-size:2.6rem; line-height:1;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(238,205,118,0.32);
+  transition:-webkit-text-stroke-color 0.3s ease;
 }
-.service-plaque:hover::before{ transform:scaleX(1); }
-.service-plaque:hover::after{ left:125%; }
-.service-plaque svg, .service-plaque .service-icon{
-  width:30px; height:30px; color:var(--gold-bright); margin-bottom:20px;
-  transition:transform 0.4s ease, color 0.3s ease;
-  object-fit:contain;
-  display:block;
+.service-card:hover .service-index{ -webkit-text-stroke-color:rgba(238,205,118,0.8); }
+.service-badge{
+  width:58px; height:58px;
+  display:grid; place-items:center;
+  border-radius:16px;
+  margin-bottom:24px;
+  background:linear-gradient(145deg, rgba(238,205,118,0.22), rgba(138,109,36,0.1));
+  border:1px solid rgba(238,205,118,0.4);
+  box-shadow:0 8px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,236,190,0.25);
+  transition:transform 0.4s ease;
 }
-.service-plaque:hover svg, .service-plaque:hover .service-icon{ transform:scale(1.15) rotate(-4deg); }
-.service-plaque h3{ font-size:1.25rem; margin-bottom:10px; }
-.service-plaque p{ color:var(--muted); font-size:0.92rem; }
+.service-card:hover .service-badge{ transform:translateY(-3px) rotate(-5deg) scale(1.06); }
+.service-badge .service-icon{ width:28px; height:28px; object-fit:contain; display:block; }
+.service-card h3{ font-size:1.4rem; margin-bottom:10px; }
+.service-card p{ color:var(--muted); font-size:0.94rem; line-height:1.65; margin-bottom:20px; }
+.service-tags{
+  list-style:none; margin:0 0 24px; padding:0;
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.service-tags li{
+  font-size:0.72rem; letter-spacing:0.05em;
+  padding:5px 12px; border-radius:999px;
+  color:var(--gold-bright);
+  background:rgba(201,162,39,0.1);
+  border:1px solid rgba(201,162,39,0.28);
+}
+.service-link{
+  margin-top:auto;
+  display:inline-flex; align-items:center; gap:8px;
+  align-self:flex-start;
+  color:var(--gold-bright);
+  text-decoration:none;
+  font-size:0.86rem; font-weight:500; letter-spacing:0.05em;
+  padding-bottom:3px;
+  border-bottom:1px solid rgba(238,205,118,0.35);
+  transition:gap 0.25s ease, border-color 0.25s ease;
+}
+.service-link svg{ width:16px; height:16px; }
+.service-card:hover .service-link, .service-link:hover{ gap:14px; border-color:var(--gold-bright); }
 .services-loading{ text-align:center; color:var(--muted); padding:60px 0; }
+@media (max-width:900px){
+  .services-grid{ grid-template-columns:repeat(2, 1fr); }
+  .service-cell, .service-cell:nth-child(1), .service-cell:nth-child(2){ grid-column:span 1; }
+  .service-cell:last-child:nth-child(odd){ grid-column:span 2; }
+}
+@media (max-width:600px){
+  .services-grid{ grid-template-columns:1fr; gap:16px; }
+  .service-cell:last-child:nth-child(odd){ grid-column:span 1; }
+  .service-card{ padding:28px 24px 26px; }
+}
 
 /* ---------- PROCESS ---------- */
 .process-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
@@ -453,7 +530,9 @@ section{ padding:100px 0; position:relative; }
 .pricing-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:26px; }
 .price-card{
   padding:34px 30px;
-  background:var(--leather-mid);
+  background-color:var(--leather-mid);
+  background-image:linear-gradient(rgba(30,18,12,0.5), rgba(14,8,5,0.66)), var(--leather-tex);
+  background-size:cover, 220px 220px;
   position:relative;
   isolation:isolate;
   display:flex;
@@ -564,7 +643,7 @@ section{ padding:100px 0; position:relative; }
 .contact-info .direct a{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--cream); font-size:0.95rem; }
 .contact-info .direct svg{ width:20px; height:20px; color:var(--gold-bright); }
 
-form{ display:flex; flex-direction:column; gap:16px; background:var(--leather-mid); padding:34px; }
+form{ display:flex; flex-direction:column; gap:16px; background-color:var(--leather-mid); background-image:linear-gradient(rgba(30,18,12,0.5), rgba(14,8,5,0.66)), var(--leather-tex); background-size:cover, 220px 220px; padding:34px; }
 .field{ display:flex; flex-direction:column; gap:6px; }
 .field label{ font-size:0.78rem; letter-spacing:0.05em; color:var(--muted); }
 .field input, .field select, .field textarea{

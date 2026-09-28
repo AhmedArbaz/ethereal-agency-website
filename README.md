@@ -102,9 +102,11 @@ usage quotas, so the site keeps working even after long gaps with no visits.
   particles and a soft glow, plus subtle mouse-parallax camera movement.
   It's abstract/brand-original artwork (not a copy of any third-party
   site's assets) built to fit this site's gold/leather palette.
-- The old photographic leather background image is gone site-wide,
-  replaced by a procedural dark gradient + fine grain (`.bg-animated` in
-  `globals.css`) — lighter to load and blends better with the new 3D hero.
+- The hero keeps its own dark backdrop so the 3D scene stays clean; every
+  section below it uses the animated leather photo background
+  (`.bg-animated`, `/images/leather-bg.webp`), and cards, the pricing
+  panels, the contact form, the nav and the marquee carry the brown leather
+  texture (`--leather-tex`, `/images/brown-leather.webp`).
 - Word-by-word reveal animation on the hero headline, scroll-reveal
   (`app/Reveal.js`) on every section/card, magnetic buttons
   (`app/Magnetic.js`), tilt-on-hover cards (`app/Tilt.js`), a soft custom

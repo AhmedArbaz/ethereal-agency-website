@@ -168,7 +168,7 @@ export default function Home() {
             <Reveal as="p" delay={160}>Every engagement is handled end-to-end — you don&apos;t need five different freelancers for a website, its backend, and its brand.</Reveal>
           </div>
         </div>
-        <div className="wrap" style={{ padding: 0 }}>
+        <div className="wrap">
           <ServicesGrid />
         </div>
       </section>

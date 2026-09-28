@@ -13,6 +13,8 @@ export default function Tilt({ as: Tag = 'div', children, className = '', max = 
   function handleMove(e) {
     if (!enabledRef.current || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
+    ref.current.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    ref.current.style.setProperty('--my', `${e.clientY - rect.top}px`);
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
     ref.current.style.transform =

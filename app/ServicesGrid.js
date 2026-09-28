@@ -5,6 +5,24 @@ import Image from 'next/image';
 import Reveal from './Reveal';
 import Tilt from './Tilt';
 
+// Optional highlight chips per service id. New services added from the
+// admin panel simply render without chips.
+const HIGHLIGHTS = {
+  'nextjs-dev': ['React', 'SEO-ready', 'Fast'],
+  salesforce: ['Apex', 'LWC', 'Experience Cloud'],
+  uiux: ['Wireframes', 'Prototypes', 'UI kits'],
+  'graphics-logos': ['Logos', 'Brand kits', 'Social'],
+  'full-website': ['Design', 'Build', 'Launch'],
+};
+
+function Arrow() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export default function ServicesGrid() {
   const [services, setServices] = useState(null);
 
@@ -22,13 +40,24 @@ export default function ServicesGrid() {
   return (
     <div className="services-grid">
       {services.map((service, i) => (
-        <Reveal key={service.id} delay={(i % 5) * 90}>
-          <Tilt as="div" className="service-plaque" max={6}>
-            {service.iconUrl && (
-              <Image src={service.iconUrl} alt="" className="service-icon" width={30} height={30} unoptimized={service.iconUrl.startsWith('data:')} />
-            )}
+        <Reveal key={service.id} className="service-cell" delay={(i % 5) * 90}>
+          <Tilt as="article" className="service-card" max={5}>
+            <span className="service-index">{String(i + 1).padStart(2, '0')}</span>
+            <div className="service-badge">
+              {service.iconUrl && (
+                <Image src={service.iconUrl} alt="" className="service-icon" width={28} height={28} unoptimized={service.iconUrl.startsWith('data:')} />
+              )}
+            </div>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+            {HIGHLIGHTS[service.id] && (
+              <ul className="service-tags">
+                {HIGHLIGHTS[service.id].map((t) => <li key={t}>{t}</li>)}
+              </ul>
+            )}
+            <a href="#contact" className="service-link">
+              Get a quote <Arrow />
+            </a>
           </Tilt>
         </Reveal>
       ))}
