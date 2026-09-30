@@ -11,6 +11,7 @@ import CustomCursor from './CustomCursor';
 import SmoothScroll from './SmoothScroll';
 import HeroScene from './HeroScene';
 import Tilt from './Tilt';
+import { ServicesHead, ProcessBlock } from './SiteSections';
 import logo from '../public/images/logo.png';
 
 const EMPTY_FORM = { name: '', email: '', service: 'Next.js Website', message: '' };
@@ -162,11 +163,7 @@ export default function Home() {
       {/* ============ SERVICES ============ */}
       <section id="services" className="leather">
         <div className="wrap">
-          <div className="section-head">
-            <Reveal as="span" className="kicker">What we build</Reveal>
-            <Reveal as="h2" delay={80}>Five disciplines, one studio</Reveal>
-            <Reveal as="p" delay={160}>Every engagement is handled end-to-end — you don&apos;t need five different freelancers for a website, its backend, and its brand.</Reveal>
-          </div>
+          <ServicesHead />
         </div>
         <div className="wrap">
           <ServicesGrid />
@@ -176,32 +173,7 @@ export default function Home() {
       {/* ============ PROCESS ============ */}
       <section id="process" className="leather stitch">
         <div className="wrap">
-          <div className="section-head">
-            <Reveal as="span" className="kicker">How it works</Reveal>
-            <Reveal as="h2" delay={80}>Four steps from brief to launch</Reveal>
-          </div>
-          <div className="process-row">
-            <Reveal className="process-step" delay={0}>
-              <div className="num">1</div>
-              <h3>Discovery</h3>
-              <p>We scope your goals, audience, and must-have features in one short call or form.</p>
-            </Reveal>
-            <Reveal className="process-step" delay={100}>
-              <div className="num">2</div>
-              <h3>Design</h3>
-              <p>Wireframes and a visual UI direction, shared for your feedback before any code is written.</p>
-            </Reveal>
-            <Reveal className="process-step" delay={200}>
-              <div className="num">3</div>
-              <h3>Development</h3>
-              <p>The approved design gets built in Next.js, with Salesforce wired in where needed.</p>
-            </Reveal>
-            <Reveal className="process-step" delay={300}>
-              <div className="num">4</div>
-              <h3>Launch</h3>
-              <p>Testing, handover, and support after the site goes live.</p>
-            </Reveal>
-          </div>
+          <ProcessBlock />
         </div>
       </section>
 

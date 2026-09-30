@@ -7,6 +7,7 @@ import logo from '../../public/images/logo.png';
 import ServicesPanel from './ServicesPanel';
 import PortfolioPanel from './PortfolioPanel';
 import LeadsPanel from './LeadsPanel';
+import ContentPanel from './ContentPanel';
 
 function CheckIcon() {
   return (
@@ -23,7 +24,7 @@ function money(n) {
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('leads'); // leads | pricing | services | portfolio
+  const [activeTab, setActiveTab] = useState('leads'); // leads | pricing | services | content | portfolio
   const [data, setData] = useState(null);
   const [selCat, setSelCat] = useState(null);
   const [selSub, setSelSub] = useState(null);
@@ -208,6 +209,13 @@ export default function AdminDashboard() {
         </button>
         <button
           type="button"
+          className={'filter-pill' + (activeTab === 'content' ? ' active' : '')}
+          onClick={() => setActiveTab('content')}
+        >
+          Section Text
+        </button>
+        <button
+          type="button"
           className={'filter-pill' + (activeTab === 'portfolio' ? ' active' : '')}
           onClick={() => setActiveTab('portfolio')}
         >
@@ -230,6 +238,12 @@ export default function AdminDashboard() {
       {activeTab === 'services' && (
         <div className="wrap admin-content admin-content-single">
           <ServicesPanel />
+        </div>
+      )}
+
+      {activeTab === 'content' && (
+        <div className="wrap admin-content admin-content-single">
+          <ContentPanel />
         </div>
       )}
 

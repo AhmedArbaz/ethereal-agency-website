@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { DEFAULT_SERVICE_TAGS, MAX_TAGS, MAX_TAG_LENGTH, cleanTags } from '../../lib/serviceTags';
 
 const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
@@ -14,7 +15,62 @@ function newService() {
     title: '',
     description: '',
     iconUrl: '',
+    tags: [],
   };
+}
+
+// Chip editor: type a tag, press Enter or comma to add it, click x to remove.
+function TagsEditor({ id, tags, onChange }) {
+  const [draft, setDraft] = useState('');
+
+  function commit(text) {
+    const next = cleanTags([...tags, ...text.split(',')]);
+    onChange(next);
+    setDraft('');
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      if (draft.trim()) commit(draft);
+    } else if (e.key === 'Backspace' && !draft && tags.length) {
+      onChange(tags.slice(0, -1));
+    }
+  }
+
+  const full = tags.length >= MAX_TAGS;
+
+  return (
+    <div className="field">
+      <label htmlFor={'tags-' + id}>Highlight tags (shown under the description)</label>
+      <div className="tag-editor">
+        {tags.map((t) => (
+          <span className="tag-chip" key={t}>
+            {t}
+            <button
+              type="button"
+              aria-label={'Remove tag ' + t}
+              onClick={() => onChange(tags.filter((x) => x !== t))}
+            >
+              ×
+            </button>
+          </span>
+        ))}
+        <input
+          id={'tags-' + id}
+          type="text"
+          value={draft}
+          maxLength={MAX_TAG_LENGTH}
+          disabled={full}
+          placeholder={full ? 'Max ' + MAX_TAGS + ' tags' : tags.length ? 'Add another…' : 'e.g. React'}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={onKeyDown}
+          onBlur={() => draft.trim() && commit(draft)}
+        />
+      </div>
+      <small className="tag-hint">Enter ya comma dabao tag add karne ke liye. Max {MAX_TAGS} tags.</small>
+    </div>
+  );
 }
 
 export default function ServicesPanel() {
@@ -27,7 +83,16 @@ export default function ServicesPanel() {
   useEffect(() => {
     fetch('/api/services')
       .then((res) => res.json())
-      .then((json) => setServices(Array.isArray(json) ? json : []))
+      .then((json) =>
+        setServices(
+          (Array.isArray(json) ? json : []).map((svc) => ({
+            ...svc,
+            // Older records have no tags yet: start from the old hardcoded
+            // chips so saving doesn't silently wipe them from the site.
+            tags: Array.isArray(svc.tags) ? svc.tags : DEFAULT_SERVICE_TAGS[svc.id] || [],
+          }))
+        )
+      )
       .catch(() => setStatusMsg('Could not load services.'));
   }, []);
 
@@ -167,6 +232,11 @@ export default function ServicesPanel() {
                   placeholder="One or two sentences about this service"
                 />
               </div>
+              <TagsEditor
+                id={service.id}
+                tags={service.tags || []}
+                onChange={(next) => updateField(index, 'tags', next)}
+              />
             </div>
 
             <button

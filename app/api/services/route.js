@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDb } from '../../../lib/firebaseAdmin';
 import { verifySessionValue, SESSION_COOKIE_NAME } from '../../../lib/auth';
+import { cleanTags } from '../../../lib/serviceTags';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,6 +42,9 @@ export async function PUT(request) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }
 
+  // Normalise tags server-side so the site never renders junk chips.
+  const items = body.map((item) => ({ ...item, tags: cleanTags(item.tags) }));
+
   let db;
   try {
     db = getDb();
@@ -50,7 +54,7 @@ export async function PUT(request) {
 
   try {
     await db.collection(COLLECTION).doc(DOC_ID).set({
-      items: body,
+      items,
       updatedAt: new Date().toISOString(),
     });
     return NextResponse.json({ ok: true });

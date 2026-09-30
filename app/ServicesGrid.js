@@ -4,16 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Reveal from './Reveal';
 import Tilt from './Tilt';
+import { DEFAULT_SERVICE_TAGS, cleanTags } from '../lib/serviceTags';
 
-// Optional highlight chips per service id. New services added from the
-// admin panel simply render without chips.
-const HIGHLIGHTS = {
-  'nextjs-dev': ['React', 'SEO-ready', 'Fast'],
-  salesforce: ['Apex', 'LWC', 'Experience Cloud'],
-  uiux: ['Wireframes', 'Prototypes', 'UI kits'],
-  'graphics-logos': ['Logos', 'Brand kits', 'Social'],
-  'full-website': ['Design', 'Build', 'Launch'],
-};
 
 function Arrow() {
   return (
@@ -39,7 +31,12 @@ export default function ServicesGrid() {
 
   return (
     <div className="services-grid">
-      {services.map((service, i) => (
+      {services.map((service, i) => {
+        // Admin-edited tags win; older records fall back to the defaults.
+        const tags = Array.isArray(service.tags)
+          ? cleanTags(service.tags)
+          : DEFAULT_SERVICE_TAGS[service.id] || [];
+        return (
         <Reveal key={service.id} className="service-cell" delay={(i % 5) * 90}>
           <Tilt as="article" className="service-card" max={5}>
             <span className="service-index">{String(i + 1).padStart(2, '0')}</span>
@@ -50,9 +47,9 @@ export default function ServicesGrid() {
             </div>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
-            {HIGHLIGHTS[service.id] && (
+            {tags.length > 0 && (
               <ul className="service-tags">
-                {HIGHLIGHTS[service.id].map((t) => <li key={t}>{t}</li>)}
+                {tags.map((t) => <li key={t}>{t}</li>)}
               </ul>
             )}
             <a href="#contact" className="service-link">
@@ -60,7 +57,8 @@ export default function ServicesGrid() {
             </a>
           </Tilt>
         </Reveal>
-      ))}
+        );
+      })}
     </div>
   );
 }
